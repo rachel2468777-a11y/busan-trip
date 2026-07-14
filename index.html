@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>韓國釜山遊記 | 2026 5天4夜之旅</title>
+    <!-- 引入 Google 字體與 FontAwesome 圖標 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            600: '#2563eb',
+                            800: '#1e40af',
+                            900: '#1e3d59',
+                        },
+                        seafoam: '#17b978',
+                        sunset: '#ff6e40',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        fun: ['Fredoka One', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f3f7f9;
+        }
+        .glass-header {
+            background: linear-gradient(135deg, #1e3d59 0%, #17b978 100%);
+        }
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 24px;
+            bottom: -24px;
+            width: 2px;
+            background: #cbd5e1;
+            z-index: 1;
+        }
+        .timeline-item:last-child .timeline-line::after {
+            display: none;
+        }
+        .tab-active {
+            background-color: #1e3d59 !important;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 61, 89, 0.2);
+        }
+        /* 隱藏水平捲軸但保留捲動功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* 燈箱全螢幕模式 */
+        .lightbox-active {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-navy-100 pb-12">
+
+    <header class="glass-header text-white text-center py-8 px-4 relative overflow-hidden shadow-lg">
+        <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+        
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-wider font-fun mb-2 drop-shadow-md">
+            韓國釜山遊記
+        </h1>
+        <p class="text-sm md:text-lg opacity-90 font-light tracking-widest">2026/07/22 (三) – 07/26 (日) | 5天4夜之旅</p>
+        
+        <div class="flex flex-wrap justify-center gap-2 mt-4">
+            <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs border border-white/20">
+                <i class="fa-solid fa-plane-departure"></i> 
+                <span>去程：07/22 16:40 ➔ 19:55 (虎航 IT606)</span>
+            </div>
+            <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs border border-white/20">
+                <i class="fa-solid fa-plane-arrival"></i> 
+                <span>回程：07/26 20:45 ➔ 22:10 (IT607)</span>
+            </div>
+            <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs border border-white/20">
+                <i class="fa-solid fa-hotel"></i> 
+                <span>住宿：西面中央飯店 (西面丹巴斯塔中央飯店)</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto -mt-6 px-4 relative z-20">
+        <div class="bg-white rounded-2xl p-4 md:p-6 shadow-xl border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div class="w-full md:w-2/3">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-bold text-navy-900 flex items-center gap-1.5">
+                        <i class="fa-solid fa-square-poll-vertical text-seafoam"></i> 行程挑戰完成度
+                    </span>
+                    <span id="progress-percent" class="text-sm font-black text-seafoam">0%</span>
+                </div>
+                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                    <div id="progress-fill" class="bg-gradient-to-r from-seafoam to-emerald-500 h-full w-0 transition-all duration-500 ease-out"></div>
+                </div>
+                <div class="flex justify-between items-center text-xs text-gray-400 mt-1">
+                    <div>已挑戰：<strong id="checked-count" class="text-navy-900">0</strong> / <span id="total-count">0</span> 個必訪景點</div>
+                    <div class="text-[10px] text-navy-600 font-medium">💡 行程皆可自由修改、新增及刪除</div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-2 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
+                <button onclick="openTab('subway')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs bg-navy-50 text-navy-900 hover:bg-navy-100 transition">
+                    <i class="fa-solid fa-subway text-navy-600"></i> <span>🚇 釜山地鐵圖</span>
+                </button>
+                <button onclick="openTab('toolbox')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs bg-orange-50 text-orange-600 hover:bg-orange-100 transition">
+                    <i class="fa-solid fa-toolbox"></i> <span>工具箱 & 打包</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-6 px-4">
+        <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="search-input" oninput="filterSchedule()" placeholder="輸入關鍵字（例如：EGG DROP、地鐵、南浦洞、黑糖餅、機票...）" class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-navy-600 focus:border-transparent bg-white shadow-sm text-sm">
+        </div>
+    </div>
+
+    <nav class="max-w-4xl mx-auto mt-6 px-4 overflow-x-auto flex gap-2 no-scrollbar" id="tab-nav">
+        <button onclick="switchTab(1)" class="tab-btn px-5 py-3 rounded-xl text-sm font-bold bg-white text-navy-900 border border-slate-100 shadow-sm whitespace-nowrap transition-all duration-300 hover:bg-slate-50">Day 1 西面</button>
+        <button onclick="switchTab(2)" class="tab-btn px-5 py-3 rounded-xl text-sm font-bold bg-white text-navy-900 border border-slate-100 shadow-sm whitespace-nowrap transition-all duration-300 hover:bg-slate-50">Day 2 海雲臺</button>
+        <button onclick="switchTab(3)" class="tab-btn px-5 py-3 rounded-xl text-sm font-bold bg-white text-navy-900 border border-slate-100 shadow-sm whitespace-nowrap transition-all duration-300 hover:bg-slate-50">Day 3 樂天＆滑車</button>
+        <button onclick="switchTab(4)" class="tab-btn px-5 py-3 rounded-xl text-sm font-bold bg-white text-navy-900 border border-slate-100 shadow-sm whitespace-nowrap transition-all duration-300 hover:bg-slate-50">Day 4 松島＆廣安里</button>
+        <button onclick="switchTab(5)" class="tab-btn px-5 py-3 rounded-xl text-sm font-bold bg-white text-navy-900 border border-slate-100 shadow-sm whitespace-nowrap transition-all duration-300 hover:bg-slate-50">Day 5 南浦洞</button>
+        <button onclick="openTab('subway')" class="tab-btn px-5 py-3 rounded-xl text-sm font-bold bg-sky-50 text-sky-700 border border-sky-100 shadow-sm whitespace-nowrap transition-all duration-300 hover:bg-sky-100">🚇 地鐵導覽</button>
+        <button onclick="openTab('toolbox')" class="tab-btn px-5 py-3 rounded-xl text-sm font-bold bg-orange-50 text-orange-700 border border-orange-100 shadow-sm whitespace-nowrap transition-all duration-300 hover:bg-orange-100">🧰 工具與備忘</button>
+    </nav>
+
+    <main class="max-w-4xl mx-auto mt-6 px-4">
+
+        <!-- 動態行程容器 -->
+        <div id="itinerary-days-container"></div>
+
+        <!-- ================= SUBWAY MAP 地鐵導覽分頁 ================= -->
+        <div id="page-subway" class="day-page space-y-6 hidden">
+            <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-lg font-bold text-navy-900 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-subway text-sky-500"></i> 🗺️ 釜山地鐵路線圖 & 行程指南
+                </h3>
+                <p class="text-xs text-slate-400 mb-4">💡 點擊下方地鐵圖可以開啟超大高清視窗、自由放大及拖曳查看！</p>
+                
+                <!-- 地鐵圖容器 -->
+                <div class="relative overflow-hidden rounded-xl border border-slate-200 shadow-inner group cursor-zoom-in" onclick="openLightbox(document.getElementById('subway-main-img').src)">
+                    <button onclick="openEditSubwayModal(); event.stopPropagation();" class="absolute top-3 right-3 bg-white/90 backdrop-blur text-navy-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg hover:bg-white hover:scale-105 transition flex items-center gap-1.5 z-20 border border-slate-200">
+                        <i class="fa-solid fa-pen"></i> 更換地鐵圖
+                    </button>
+                    <img id="subway-main-img" src="IMG_8952.JPG" alt="釜山地鐵圖" class="w-full h-auto object-cover max-h-[500px] transition group-hover:scale-[1.01] duration-300" onerror="this.src='https://placehold.co/800x600/1e3d59/ffffff?text=Busan+Subway+Map'">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center pointer-events-none">
+                        <span class="bg-white/90 text-navy-900 px-4 py-2 rounded-full text-xs font-bold shadow-md flex items-center gap-1.5">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i> 點擊放大地鐵圖
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 地鐵指南內容 -->
+                <div class="mt-6 border-t border-slate-100 pt-6 space-y-6">
+                    <!-- WOWPASS 機台 -->
+                    <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100 text-sm">
+                        <h4 class="font-bold text-amber-900 flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-money-bill-transfer"></i> WOWPASS 機台分布位置
+                        </h4>
+                        <p class="text-amber-950 font-medium text-xs">
+                            📍 南浦站樂天百貨 * 2台 <br>
+                            📍 西面站樂天百貨 * 2台 <br>
+                            📍 海雲台 * 2台 <span class="text-slate-400 font-normal">（其中有一台離地鐵站較遠）</span>
+                        </p>
+                    </div>
+
+                    <!-- 橘色 1 號線 -->
+                    <div>
+                        <h4 class="font-bold text-orange-600 flex items-center gap-2 mb-3 text-sm border-b border-orange-100 pb-2">
+                            <span class="w-3 h-3 rounded-full bg-orange-500"></span> 橘色 1 號線 · 熱門站景點指南
+                        </h4>
+                        <div class="space-y-4 text-xs">
+                            <div class="p-3 bg-slate-50 rounded-xl hover:bg-slate-100/70 transition">
+                                <span class="font-bold text-navy-900 text-sm">【中央站】</span>
+                                <p class="text-slate-600 mt-1">離飯店最近的 <b>14號出口</b> 附近，步行超省力（飯店旁邊即有 GS25 便利商店，補貨非常方便）。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl hover:bg-slate-100/70 transition">
+                                <span class="font-bold text-navy-900 text-sm">【南浦站】</span>
+                                <p class="text-slate-600 mt-1">樂天百貨、釜山塔（龍頭山公園）、必吃<b>橋村炸雞</b>、傳統消暑<b>奶奶伽倻小麥冷麵</b>。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl hover:bg-slate-100/70 transition">
+                                <span class="font-bold text-navy-900 text-sm">【札嘎其站】</span>
+                                <p class="text-slate-600 mt-1">BIFF廣場，逛街美食天堂！可一路逛：<b>國際市場、元祖糖餅、豆腐家、豬腳一條街</b>。</p>
+                            </div>
+                            <div class="p-3 bg-orange-50/40 rounded-xl border border-orange-100/50">
+                                <span class="font-bold text-orange-800 text-sm">🏠 【白險灘文化村】（隔壁小島）防雷大公開</span>
+                                <p class="text-slate-600 mt-1.5 leading-relaxed">
+                                    從南浦站出發，可於路邊轉搭<b>公車 7、70、508路</b>直接抵達「Huinnyeoul Culture Village」站。<br>
+                                    <span class="text-red-500 font-bold">⚠️ 爬樓梯絕技：</span>強烈建議從<b>上面往下逛</b>，不要先走去下方的「絕影步道」，否則後半段會面臨永無止境的「爬山階梯地獄」！<br>
+                                    沿途有許多唯美臨海咖啡廳與網美文創小店，建議預留<b>半天左右</b>的時間優雅散步。<br>
+                                    <a href="https://maps.google.com/?q=Huinnyeoul+Culture+Village" target="_blank" class="inline-flex items-center gap-1 text-blue-600 font-bold mt-2 hover:underline text-[11px]">
+                                        <i class="fa-solid fa-map-location-dot"></i> Google Maps 快速導航
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 綠色 2 號線 -->
+                    <div>
+                        <h4 class="font-bold text-emerald-600 flex items-center gap-2 mb-3 text-sm border-b border-emerald-100 pb-2">
+                            <span class="w-3 h-3 rounded-full bg-emerald-500"></span> 綠色 2 號線 · 熱門站景點指南
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-navy-900">【西面站】 (轉乘大站)</span>
+                                <p class="text-slate-600 mt-1">交界大站，超好逛的 Running Man 體驗館、人生四格照相館、樂天百貨。<br><b>美食一條街：</b>松亭三代豬肉湯飯、Solsot、螞蟻窩（海鮮章魚）、Doyeonjeong（美味炸醬麵）。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-navy-900">【海雲台站】 (度假勝地)</span>
+                                <p class="text-slate-600 mt-1">味讚王鹽烤肉、Miryang 密陽豬肉湯飯、Solsot。<br>朝海灘方向直行，可散步到尾埔站搭乘超夢幻的<b>海雲台天空膠囊列車</b>（尾埔 ➔ 青沙浦）。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-navy-900">【尾埔站】 (藍線起點)</span>
+                                <p class="text-slate-600 mt-1">擁有網美名店 蘭黛Jb 海雲台咖啡廳，走路5分鐘即可抵達超高空景觀台 <b>BUSAN X the SKY</b>。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-navy-900">【青沙浦站】 (網美打卡)</span>
+                                <p class="text-slate-600 mt-1">解鎖必拍 <b>韓版灌籃高手海景平交道</b>、踏石天空步道，海景第一排極致放鬆。</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-navy-900">【松亭站】 (滑車與樂園)</span>
+                                <p class="text-slate-600 mt-1"><b>Skyline Luge 斜坡滑車</b> 就在這裡！旁邊緊鄰釜山樂天世界遊樂園、樂天百貨，適合一網打盡！</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl">
+                                <span class="font-bold text-navy-900">【Centum City站】 (豪華採購)</span>
+                                <p class="text-slate-600 mt-1">直達新世界百貨，內有釜山最奢華、最有名的五星級 <b>SPA LAND 汗蒸幕</b>，逛街放鬆一次滿足。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= TOOLBOX 工具與備忘欄 ================= -->
+        <div id="page-toolbox" class="day-page space-y-6 hidden">
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-lg font-bold text-navy-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-orange-500"></i> 💰 隨手記帳與韓元計算機
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">輸入韓元 (KRW)</label>
+                        <input type="number" id="krw-input" placeholder="例如：50000" oninput="convertCurrency()" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-navy-600 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">概估台幣 (TWD) <span class="text-[10px] text-slate-400">(匯率概估 0.024)</span></label>
+                        <div id="twd-result" class="w-full px-3 py-2 bg-slate-50 rounded-xl font-bold text-orange-600 text-sm h-10 flex items-center">NT$ 0</div>
+                    </div>
+                </div>
+                <div class="border-t border-slate-100 pt-4">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">小額預算速查表</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                        <div class="p-2 bg-slate-50 rounded-lg text-center cursor-pointer hover:bg-slate-100 transition" onclick="quickCalc(1000)">1,000₩ ≈ NT$24</div>
+                        <div class="p-2 bg-slate-50 rounded-lg text-center cursor-pointer hover:bg-slate-100 transition" onclick="quickCalc(5000)">5,000₩ ≈ NT$120</div>
+                        <div class="p-2 bg-slate-50 rounded-lg text-center cursor-pointer hover:bg-slate-100 transition" onclick="quickCalc(10000)">10,000₩ ≈ NT$240</div>
+                        <div class="p-2 bg-slate-50 rounded-lg text-center cursor-pointer hover:bg-slate-100 transition" onclick="quickCalc(50000)">50,000₩ ≈ NT$1,200</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-navy-900 flex items-center gap-2">
+                        <i class="fa-solid fa-suitcase-rolling text-emerald-500"></i> 🎒 隨身行李打包清單
+                    </h3>
+                    <button onclick="openPackingModal()" class="px-3 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> 新增項目
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="packing-container">
+                    <!-- 此處將透過 JS 動態填入打包清單 -->
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-navy-900 flex items-center gap-2">
+                        <i class="fa-solid fa-language text-blue-500"></i> 🗣️ 問路 & 點餐極簡韓語速查
+                    </h3>
+                    <button onclick="openKoreanModal()" class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> 新增常用句
+                    </button>
+                </div>
+                <div class="space-y-3" id="korean-container">
+                    <!-- 此處將透過 JS 動態填入常用韓語清單 -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="edit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 max-h-[90vh] flex flex-col">
+            
+            <div class="bg-gradient-to-r from-navy-900 to-navy-600 text-white p-4 flex justify-between items-center">
+                <h3 id="modal-title" class="font-bold text-lg">✏️ 編輯行程卡片</h3>
+                <button onclick="closeModal()" class="text-white/80 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="p-6 space-y-4 overflow-y-auto flex-1 text-sm">
+                <input type="hidden" id="form-card-id">
+                <input type="hidden" id="form-mode" value="schedule"> <!-- schedule / packing / korean -->
+                
+                <!-- ================= 1. 行程表單區塊 ================= -->
+                <div id="modal-schedule-fields" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">安排天數</label>
+                            <select id="form-day" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none">
+                                <option value="1">Day 1 西面</option>
+                                <option value="2">Day 2 海雲臺</option>
+                                <option value="3">Day 3 樂天＆滑車</option>
+                                <option value="4">Day 4 松島＆廣安里</option>
+                                <option value="5">Day 5 南浦洞</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">時間標記 (例如 08:30 / 夜間)</label>
+                            <input type="text" id="form-time" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="10:00">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">行程名稱</label>
+                        <input type="text" id="form-title" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：🏖️ 海雲台海水浴場散步">
+                    </div>
+
+                    <!-- 行程圖片編輯欄位 -->
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                        <label class="block text-xs font-bold text-navy-900 flex items-center gap-1">
+                            <i class="fa-solid fa-image text-indigo-600"></i> 行程代表圖片 (網址或手機上傳)
+                        </label>
+                        <input type="text" id="form-img-url" oninput="previewImageInput(this.value)" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="貼上網路圖片網址 (https://...)">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] text-slate-400">或直接從手機/電腦上傳照片：</span>
+                            <input type="file" id="form-img-file" accept="image/*" onchange="handleImageUpload(event)" class="text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-50 file:text-indigo-700 file:cursor-pointer hover:file:bg-indigo-100">
+                        </div>
+                        <!-- 圖片預覽容器 -->
+                        <div id="modal-img-preview-container" class="hidden relative mt-2 rounded-lg overflow-hidden border border-slate-200">
+                            <img id="modal-img-preview" src="" class="w-full h-32 object-cover">
+                            <button type="button" onclick="removeModalImage()" class="absolute top-1.5 right-1.5 bg-black/60 hover:bg-black text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] transition"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">行程內容描述</label>
+                        <textarea id="form-desc" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="簡單寫一下這裡有什麼好玩的..."></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">自訂標籤名稱</label>
+                            <input type="text" id="form-badge-text" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：必吃 / 計程車">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">標籤主題顏色</label>
+                            <select id="form-badge-color" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none">
+                                <option value="blue">海軍藍 (Blue)</option>
+                                <option value="emerald">翡翠綠 (Emerald)</option>
+                                <option value="amber">琥珀橘 (Amber)</option>
+                                <option value="orange">活力橘 (Orange)</option>
+                                <option value="teal">水鴨綠 (Teal)</option>
+                                <option value="sky">晴空藍 (Sky)</option>
+                                <option value="indigo">靛藍色 (Indigo)</option>
+                                <option value="pink">櫻花粉 (Pink)</option>
+                                <option value="slate">低調灰 (Slate)</option>
+                                <option value="violet">紫羅蘭 (Violet)</option>
+                                <option value="yellow">向日葵黃 (Yellow)</option>
+                                <option value="rose">玫瑰紅 (Rose)</option>
+                                <option value="cyan">青空藍 (Cyan)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 雙連結新增區塊 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <div>
+                            <label class="block text-xs font-bold text-navy-900 mb-1 flex items-center gap-1">
+                                <i class="fa-solid fa-map-location-dot text-blue-600"></i> 地圖位置連結 (Google Map)
+                            </label>
+                            <input type="url" id="form-map-url" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="https://maps.google.com/?q=...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-navy-900 mb-1 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info text-emerald-600"></i> 景點介紹網站 (部落格 / 官網)
+                            </label>
+                            <input type="url" id="form-intro-url" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="https://...">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">備註/地址/首選小吃 (可留空)</label>
+                        <textarea id="form-memo" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：📍 飯店地址：부산 ..."></textarea>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-3">
+                        <span class="block text-xs font-bold text-sunset mb-2"><i class="fa-solid fa-circle-exclamation"></i> 可選：新增收合式防雷攻略 (Accordion)</span>
+                        <div class="space-y-2">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-400 mb-1">防雷標題</label>
+                                <input type="text" id="form-tips-title" class="w-full px-3 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-1 focus:ring-orange-500 focus:outline-none" placeholder="例如：帶小孩必看隱私禁忌">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-400 mb-1">防雷攻略細節內容</label>
+                                <textarea id="form-tips-content" rows="2" class="w-full px-3 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-1 focus:ring-orange-500 focus:outline-none" placeholder="• 19:00之前快速報到...&#13;• 5樓禁止使用手機..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= 2. 行體打包清單表單區塊 ================= -->
+                <div id="modal-packing-fields" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">物品名稱</label>
+                        <input type="text" id="form-pack-title" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：萬國轉接頭 (韓國4.7mm圓腳插)">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">補充說明 (可留空)</label>
+                        <input type="text" id="form-pack-sub" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：拍照必備 / 藍線暴走必備">
+                    </div>
+                </div>
+
+                <!-- ================= 3. 常用韓語表單區塊 ================= -->
+                <div id="modal-korean-fields" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">中文意思</label>
+                        <input type="text" id="form-kor-zh" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：請給我這個">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">韓文韓字</label>
+                        <input type="text" id="form-kor-kr" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：이것 주세요">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">發音拼音 (可留空)</label>
+                        <input type="text" id="form-kor-pin" class="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-navy-600 focus:outline-none" placeholder="例如：I-geot ju-se-yo">
+                    </div>
+                </div>
+
+                <!-- ================= 4. 地鐵圖編輯區塊 ================= -->
+                <div id="modal-subway-fields" class="space-y-4 hidden">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                        <label class="block text-xs font-bold text-navy-900 flex items-center gap-1">
+                            <i class="fa-solid fa-image text-indigo-600"></i> 地鐵圖代表圖片 (網址或手機上傳)
+                        </label>
+                        <input type="text" id="form-subway-img-url" oninput="previewSubwayImageInput(this.value)" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="貼上網路圖片網址 (https://...)">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] text-slate-400">或從手機/相簿上傳：</span>
+                            <input type="file" id="form-subway-img-file" accept="image/*" onchange="handleSubwayImageUpload(event)" class="text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-50 file:text-indigo-700 file:cursor-pointer hover:file:bg-indigo-100 w-full">
+                        </div>
+                        <div id="modal-subway-img-preview-container" class="relative mt-2 rounded-lg overflow-hidden border border-slate-200 bg-white">
+                            <img id="modal-subway-img-preview" src="" class="w-full h-40 object-contain">
+                            <button type="button" onclick="removeModalSubwayImage()" class="absolute top-1.5 right-1.5 bg-black/60 hover:bg-black text-white rounded-full w-6 h-6 flex items-center justify-center text-[10px] transition" title="恢復預設地鐵圖"><i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-1">💡 系統搭載高解析度壓縮演算法，建議上傳清晰的高畫質路線圖以供未來雙擊放大觀賞。點擊右上方重整按鈕可恢復預設釜山地圖。</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bg-slate-50 p-4 flex justify-end gap-2 border-t border-slate-100">
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-xl hover:bg-slate-300 transition font-medium">取消</button>
+                <button onclick="saveCardForm()" class="px-5 py-2 bg-navy-900 text-white rounded-xl hover:bg-navy-800 transition font-medium">儲存設定</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="lightbox-modal" class="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0" onclick="closeLightbox()">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white border border-white/20 w-10 h-10 rounded-full flex items-center justify-center text-xl transition z-50"><i class="fa-solid fa-xmark"></i></button>
+        
+        <div class="relative w-full max-w-4xl max-h-[85vh] flex items-center justify-center overflow-auto no-scrollbar" onclick="event.stopPropagation()">
+            <!-- 地鐵圖燈箱圖片 -->
+            <img id="lightbox-img" src="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300" style="transform-origin: center;">
+        </div>
+        
+        <!-- 下方提示與縮放控制列 -->
+        <div class="absolute bottom-6 flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full text-white text-xs" onclick="event.stopPropagation()">
+            <button onclick="zoomLightbox(0.1)" class="p-1 hover:text-sky-300 transition text-sm"><i class="fa-solid fa-magnifying-glass-plus"></i> 放大</button>
+            <div class="h-3 w-[1px] bg-white/20"></div>
+            <button onclick="zoomLightbox(-0.1)" class="p-1 hover:text-sky-300 transition text-sm"><i class="fa-solid fa-magnifying-glass-minus"></i> 縮小</button>
+            <div class="h-3 w-[1px] bg-white/20"></div>
+            <button onclick="resetLightboxZoom()" class="p-1 hover:text-sky-300 transition text-sm"><i class="fa-solid fa-rotate-left"></i> 重設</button>
+        </div>
+    </div>
+
+    <!-- 自訂確定確認視窗 -->
+    <div id="confirm-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-6 text-center transform scale-95 transition-transform duration-300">
+            <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-4 text-xl">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 id="confirm-title" class="text-lg font-bold text-navy-900 mb-2">確定執行此操作嗎？</h3>
+            <p id="confirm-desc" class="text-sm text-gray-500 mb-6">此動作將無法復原，請確認是否繼續。</p>
+            <div class="flex gap-2 justify-center">
+                <button onclick="closeConfirmModal(false)" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 transition text-sm font-medium">取消</button>
+                <button id="confirm-action-btn" class="px-5 py-2 bg-rose-600 text-white rounded-xl hover:bg-rose-500 transition text-sm font-medium">確定</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let checkedStates = {};
+        let currentTab = 1;
+        let activeConfirmCallback = null;
+        let lightboxZoomLevel = 1.0;
+        let subwayImageUrl = "IMG_8952.JPG";
+
+        // 預設行李清單
+        const defaultPackingList = [
+            { id: "pack-passport", text: "護照 & 列印憑證", subtext: "虎航/飯店預訂憑證", checked: false },
+            { id: "pack-money", text: "T-Money 交通卡 & 現金", subtext: "可至西面老奶奶換錢所兌換", checked: false },
+            { id: "pack-esim", text: "韓國上網 eSIM / SIM卡", subtext: "拍照、查地鐵必備", checked: false },
+            { id: "pack-plug", text: "萬國轉接頭 (韓國4.7mm雙圓腳腳插)", subtext: "韓國電壓220V", checked: false },
+            { id: "pack-power", text: "行動電源 & 傳輸線", subtext: "出門拍整天必備", checked: false },
+            { id: "pack-shoes", text: "好走休閒運動鞋", subtext: "白險灘文化村、天空步道暴走專用", checked: false }
+        ];
+
+        // 預設實用韓語
+        const defaultKoreanPhrases = [
+            { id: "kor-hello", chinese: "你好", korean: "안녕하세요", pronunciation: "An-nyeong-ha-se-yo" },
+            { id: "kor-thanks", chinese: "謝謝", korean: "감사합니다", pronunciation: "Kam-sa-ham-ni-da" },
+            { id: "kor-give", chinese: "請給我這個", korean: "이것 주세요", pronunciation: "I-geot ju-se-yo" },
+            { id: "kor-howmuch", chinese: "多少錢？", korean: "얼마예요?", pronunciation: "Eol-ma-ye-yo?" }
+        ];
+
+        let packingList = [];
+        let koreanPhrases = [];
+
+        // 2026 專業行程規劃數據庫
+        const defaultItinerary = {
+            1: [
+                {
+                    id: "d1-flight",
+                    time: "16:40",
+                    title: "🛫 去程航班：台北 ➔ 釜山 (虎航 IT606)",
+                    desc: "搭乘台灣虎航 IT606 開啟為期 5天4夜 的海濱大冒險！",
+                    badgeText: "台灣虎航",
+                    badgeColor: "orange",
+                    memo: "請於起飛前 2.5~3 小時攜帶護照抵達桃園機場辦理登機手續。",
+                    mapUrl: "https://maps.google.com/?q=Taoyuan+International+Airport",
+                    introUrl: "https://www.tigerairtw.com/"
+                },
+                {
+                    id: "d1-arrival",
+                    time: "19:55",
+                    title: "🛬 順利降落金海國際機場",
+                    desc: "安全抵達釜山，領取隨身行李並迅速辦理入境程序。",
+                    badgeText: "抵達機場",
+                    badgeColor: "emerald",
+                    mapUrl: "https://maps.google.com/?q=Gimhae+International+Airport"
+                },
+                {
+                    id: "d1-transit",
+                    time: "20:00",
+                    title: "🚕 領取行李，搭乘 Uber 前往西面",
+                    desc: "直接利用手機 Uber (韓國現支援 UT) 快速叫計程車前往市區飯店，最省體力！",
+                    badgeText: "計程車接駁",
+                    badgeColor: "blue",
+                    memo: "機場到西面中央飯店，計程車車程約 30 分鐘。"
+                },
+                {
+                    id: "d1-hotel",
+                    time: "21:00",
+                    title: "🏨 入住西面中央飯店 (Seomyeon Denbasta Central Hotel)",
+                    desc: "抵達飯店 Check-in，放好重物並做短暫整理，準備出發尋覓深夜宵夜！",
+                    badgeText: "飯店 check-in",
+                    badgeColor: "indigo",
+                    mapUrl: "https://maps.google.com/?q=Seomyeon+Denbasta+Central+Hotel",
+                    introUrl: "https://denbastaseomyeon.modoo.at/"
+                },
+                {
+                    id: "d1-dinner",
+                    time: "21:30",
+                    title: "🍲 晚餐宵夜：秀英（水營）本家豬肉湯飯",
+                    desc: "24小時不打烊！暖呼呼、鮮甜香濃的豬肉湯飯，在微涼的港都深夜品嚐最是享受！",
+                    badgeText: "24H 釜山名物",
+                    badgeColor: "rose",
+                    memo: "📍 飯店走路僅需 5 分鐘即可到達。地址：부산 부산진구 서면로68번길 25 1층",
+                    mapUrl: "https://maps.google.com/?q=Suyeong+Bonga+Daeji-gukbap",
+                    introUrl: "https://sallyplay.com/busan-food-sooyoung/"
+                }
+            ],
+            2: [
+                {
+                    id: "d2-breakfast",
+                    time: "08:00",
+                    title: "🥪 早餐：Egg Drop (西面樂天後門店)",
+                    desc: "享用美味招牌韓式厚吐司。人氣口味推薦：1. 蒜香培根奶酪三明治、2. 美式火腿奶酪三明治。",
+                    badgeText: "人氣早餐",
+                    badgeColor: "orange",
+                    memo: "從飯店步行大約 3 分鐘就能到達，超級方便！",
+                    tipsTitle: "💡 點餐機中文操作防雷密技",
+                    tipsContent: "• 點餐機右上角可以直接選擇切換成「中文」介面！\n• 自助點餐機僅支援「信用卡」或「電子支付」。\n• 若僅攜帶現金，請直接向櫃檯店員點餐（可以用手機先拍好口味圖片出示給店員點餐）。",
+                    mapUrl: "https://maps.google.com/?q=EGG+DROP+Seomyeon+Lotte+Back+Gate",
+                    introUrl: "https://www.eggdrop.co.kr/"
+                },
+                {
+                    id: "d2-exchange",
+                    time: "08:30",
+                    title: "💵 西面老奶奶換錢所 (나영환전소)",
+                    desc: "在此兌換韓元現金。從飯店步行僅大約 2 分鐘即可抵達。",
+                    badgeText: "現金兌換",
+                    badgeColor: "teal",
+                    mapUrl: "https://maps.google.com/?q=Nayoung+Exchange+Seomyeon"
+                },
+                {
+                    id: "d2-shopping",
+                    time: "09:30",
+                    title: "🛍️ 西面市場 & 西面地下街",
+                    desc: "感受釜山繁華的在地市場與大型商圈氣息，挑選超划算平價韓系服飾、彩妝美妝產品！",
+                    badgeText: "大肆採購",
+                    badgeColor: "pink",
+                    mapUrl: "https://maps.google.com/?q=Seomyeon+Market"
+                },
+                {
+                    id: "d2-subway",
+                    time: "10:00",
+                    title: "🚇 西面站 ➔ 海雲台站",
+                    desc: "由西面站 7 號出口步行 2 分鐘。路程順便為 T-Money 交通卡儲值，搭乘綠色 2 號線往「萇山 (장산)」方向，約 35 分鐘在海雲台地鐵站下車。",
+                    badgeText: "地鐵移動",
+                    badgeColor: "blue",
+                    memo: "海雲台站 3 號或 5 號出口出站。",
+                    mapUrl: "https://maps.google.com/?q=Seomyeon+Station"
+                },
+                {
+                    id: "d2-train",
+                    time: "11:30",
+                    title: "🚊 藍色海岸列車「尾埔站 (Mipo)」",
+                    desc: "前往海藍色海岸列車與膠囊列車的起點。可直接搭乘計程車（約 5~8 分鐘）或悠閒散步（約 20~25 分鐘，可飽覽海天一線無敵摩天大樓景色，完全無任何遮蔽物）。",
+                    badgeText: "海景起點",
+                    badgeColor: "sky",
+                    mapUrl: "https://maps.google.com/?q=Haeundae+Blueline+Park+Mipo+Station",
+                    introUrl: "https://www.bluelinepark.com/"
+                },
+                {
+                    id: "d2-lunch",
+                    time: "12:00",
+                    title: "🍽️ 午餐：尾埔/海雲台周邊美食探店",
+                    desc: "於蔚藍海岸周邊或尾埔站附近自由覓食，品嚐熱鬧的海景海鮮餐點、烤魚、釜山小吃（午餐敬請自理）。",
+                    badgeText: "美味午餐",
+                    badgeColor: "yellow"
+                },
+                {
+                    id: "d2-spots",
+                    time: "13:00",
+                    title: "📸 藍色海岸列車青沙浦站 (Cheongsapo)",
+                    desc: "打卡青沙浦三大聖地：青沙浦踏石觀觀景臺（高空透明天空步道）、青沙浦小鎌倉（日系平交道）、青沙浦紅白雙子星大燈塔。",
+                    badgeText: "美照連擊",
+                    badgeColor: "cyan",
+                    memo: "踏石觀景臺是玻璃天空步道，記得換鞋套，體驗懸空震撼海景！",
+                    mapUrl: "https://maps.google.com/?q=Cheongsapo+Station",
+                    introUrl: "https://www.bluelinepark.com/stationCourse.do"
+                },
+                {
+                    id: "d2-sky",
+                    time: "15:30",
+                    title: "🏙️ BUSAN X the SKY 觀景台",
+                    desc: "前往一樓大廳換票取得門票，直奔 100 樓鳥瞰絕美海雲台全景！",
+                    badgeText: "制高極限",
+                    badgeColor: "indigo",
+                    memo: "必遊看點：\n1. 100樓的「Shocking Bridge 高空透明高空玻璃步道」\n2. 99樓的「全世界最高星巴克」，進去與海景拍一張合照！",
+                    mapUrl: "https://maps.google.com/?q=BUSAN+X+the+SKY",
+                    introUrl: "https://www.busanxthesky.com/"
+                },
+                {
+                    id: "d2-spa",
+                    time: "18:00",
+                    title: "♨️ Club D OASIS 頂級海景汗蒸幕",
+                    desc: "一樓大廳右側搭乘專屬電梯直達 5 樓（建議於 19:30 前完成換票程序）。",
+                    badgeText: "暖和紓壓",
+                    badgeColor: "pink",
+                    memo: "⚠️ 請注意：若要前往 4 樓水上樂園，需額外加價支付 10,000 韓元，「且現場規定必須攜帶並穿著泳衣」！",
+                    tipsTitle: "🔥 19:00 進場黃金流程與手機拍照禁忌",
+                    tipsContent: "• 19:00~19:15 報到換票 ➔ 快速沐浴更衣 ➔ 19:30~21:00 衝上 6 樓汗蒸幕體驗「露天海景足浴池」、「扁柏木低溫汗蒸房(溫度約30幾度，適合小孩)」與冰房。\n• 隱私防雷線：5 樓的男女澡堂、更衣室泡湯區「絕對嚴格禁止拿出手機或開啟螢幕」！避免引起他人不適被工作人員喝止。6 樓公共足浴、公共大廳及4樓水上樂園則可以自由攜帶手機拍照打卡。",
+                    mapUrl: "https://maps.google.com/?q=Club+D+Oasis",
+                    introUrl: "https://www.clubdoasis.com/"
+                },
+                {
+                    id: "d2-dinner",
+                    time: "19:00",
+                    title: "🍲 晚餐：老字號「松亭三代豬肉湯飯」",
+                    desc: "西面市場最著名的排隊必吃豬肉湯飯，湯頭極為溫潤厚實，肉質大塊肥嫩！",
+                    badgeText: "傳統排隊",
+                    badgeColor: "rose",
+                    mapUrl: "https://maps.google.com/?q=Songjungsand代+Pork+Soup+Seomyeon",
+                    introUrl: "https://mimi-travel.com/seomyeon-songjungsandai/"
+                }
+            ],
+            3: [
+                {
+                    id: "d3-breakfast",
+                    time: "09:00",
+                    title: "🍳 早餐：飯店內餐廳悠閒晨光",
+                    desc: "於飯店內享用飽足美味早餐，為今天衝刺樂天世界儲備滿滿電力！",
+                    badgeText: "晨光朝食",
+                    badgeColor: "orange",
+                    mapUrl: "https://maps.google.com/?q=Seomyeon+Denbasta+Central+Hotel"
+                },
+                {
+                    id: "d3-luge",
+                    time: "10:00",
+                    title: "🏎️ Skyline Luge 釜山斜坡滑車",
+                    desc: "西面出發，計程車車程大約 40 分鐘。在專用斜坡賽道上與重力速度過招，好玩安全，親子必去！",
+                    badgeText: "競速滑車",
+                    badgeColor: "violet",
+                    mapUrl: "https://maps.google.com/?q=Skyline+Luge+Busan",
+                    introUrl: "https://www.skylineluge.kr/busan/"
+                },
+                {
+                    id: "d3-lunch",
+                    time: "12:30",
+                    title: "🍜 午餐：自理美食 / 對面龍宮海鮮炸醬麵",
+                    desc: "午餐時間。強烈推薦直接到 Skyline Luge 正對面的「龍宮海鮮炸醬麵」，大盤海鮮炸醬麵醬汁甜鹹鮮美、不辣，小孩子狂愛！飽餐後走路 5 分鐘即到樂天世界。",
+                    badgeText: "美味午餐",
+                    badgeColor: "yellow",
+                    mapUrl: "https://maps.google.com/?q=Yonggung+Haemul+Jaengban+Jajang",
+                    introUrl: "https://bobby.tw/blog/post/yonggung-jjajangmyeon/"
+                },
+                {
+                    id: "d3-lotteworld",
+                    time: "14:00",
+                    title: "🏰 釜山樂天世界冒險樂園 (Lotte World)",
+                    desc: "暢玩驚險刺激的機動遊戲與童話般的童趣設施，欣賞城堡、超華麗童話花車大遊行！",
+                    badgeText: "夢幻童趣",
+                    badgeColor: "rose",
+                    memo: "備用行程備案：海東龍宮寺（懸崖海岸古老神聖佛寺）、樂高探索中心（室內樂高積木大探索）",
+                    mapUrl: "https://maps.google.com/?q=Lotte+World+Adventure+Busan",
+                    introUrl: "https://adventurebusan.lotteworld.com/"
+                },
+                {
+                    id: "d3-dinner",
+                    time: "18:00",
+                    title: "🔥 晚餐：西面超夯「烤肉的男子 (고기굽는남자)」",
+                    desc: "超夯排隊名店！專業職人桌邊代烤，五花肉肥美多汁，大口咬下無比享受！",
+                    badgeText: "職人代烤",
+                    badgeColor: "orange",
+                    mapUrl: "https://maps.google.com/?q=Gogi+Gupneun+Namja+Seomyeon",
+                    introUrl: "https://shiaulin.pixnet.net/blog/post/45155984"
+                }
+            ],
+            4: [
+                {
+                    id: "d4-breakfast",
+                    time: "09:00",
+                    title: "🍜 早餐：草梁小麥麵 (Choryang Milmyeon)",
+                    desc: "釜山代表性國民小吃，極具嚼勁的小麥冷麵與現蒸爆汁大餃子，清涼開胃消暑！",
+                    badgeText: "消暑必吃",
+                    badgeColor: "orange",
+                    mapUrl: "https://maps.google.com/?q=Choryang+Milmyeon",
+                    introUrl: "https://jessicababy.tw/busan-choryang-milmyeon/"
+                },
+                {
+                    id: "d4-songdo",
+                    time: "10:00",
+                    title: "🚠 松島海上纜車 & 天空步道",
+                    desc: "體驗超美海上纜車大航海！沿著天空步道跨海散步、看岩南公園恐龍，並搭水晶車廂過海！",
+                    badgeText: "空中巡航",
+                    badgeColor: "cyan",
+                    mapUrl: "https://maps.google.com/?q=Songdo+Marine+Cable+Car",
+                    introUrl: "http://www.busanaircruise.co.kr/"
+                },
+                {
+                    id: "d4-lunch",
+                    time: "12:30",
+                    title: "🍜 午餐：冷麵 / 南浦洞 BIFF 廣場地道小吃",
+                    desc: "午餐時間。可以在南浦洞或松島海岸附近自由探店享用各式經典韓式拌冷麵、排骨湯。",
+                    badgeText: "地道韓食",
+                    badgeColor: "yellow"
+                },
+                {
+                    id: "d4-dinner",
+                    time: "18:00",
+                    title: "🥩 晚餐：人氣韓式燒肉 Gonag-On (고낙온)",
+                    desc: "高質感文青韓系燒烤！享受大蒜醃製厚切里肌，大口大口爽快吃肉！",
+                    badgeText: "質感烤肉",
+                    badgeColor: "rose",
+                    mapUrl: "https://maps.google.com/?q=Gonag-On+Busan"
+                },
+                {
+                    id: "d4-drone",
+                    time: "20:00",
+                    title: "🌌 廣安里海灘無人機立體光雕表演 (週六限定)",
+                    desc: "在美麗廣安沙灘與跨海大橋合影，享受週六夜間震撼天空的無人機群高空科技秀！",
+                    badgeText: "週末限定",
+                    badgeColor: "blue",
+                    tipsTitle: "💡 無人機絕佳無死角觀賞位置",
+                    tipsContent: "• 觀賞攻略：推薦大約提前 20 分鐘往沙灘的「左手邊」（朝向民樂水邊公園的方向）移動，該處視野最開闊、完全無遮蔽物，拍照最震撼！",
+                    mapUrl: "https://maps.google.com/?q=Gwangalli+Beach",
+                    introUrl: "https://taiwaneseinkorea.com/gwangalli-drone-show/"
+                }
+            ],
+            5: [
+                {
+                    id: "d5-breakfast",
+                    time: "08:00",
+                    title: "🐟 早餐：札嘎其市場海鮮大餐",
+                    desc: "走進全釜山最大傳統魚市，自由點選品嚐新鮮現切生魚片、炭烤海鮮拼盤或鮮甜烤魚！",
+                    badgeText: "鮮美海產",
+                    badgeColor: "teal",
+                    mapUrl: "https://maps.google.com/?q=Jagalchi+Market",
+                    introUrl: "https://bobowin.blog/jagalchi-market/"
+                },
+                {
+                    id: "d5-tower",
+                    time: "09:30",
+                    title: "🗼 龍頭山公園 & 釜山塔",
+                    desc: "漫步在龍頭山茂密公園中，直上釜山地標塔，俯瞰影島大橋、札嘎其港與大釜山市景。",
+                    badgeText: "城市地標",
+                    badgeColor: "indigo",
+                    mapUrl: "https://maps.google.com/?q=Busan+Tower",
+                    introUrl: "https://www.youtube.com/watch?v=F0S_oT6xL1c"
+                },
+                {
+                    id: "d5-village",
+                    time: "11:30",
+                    title: "🏡 白險灘文化村 (Huinnyeoul Culture Village)",
+                    desc: "漫步在海邊懸崖小徑，探索唯美的藍白文創聚落與海景咖啡廳，輕鬆拍出絕美文青大片！",
+                    badgeText: "文青打卡",
+                    badgeColor: "sky",
+                    mapUrl: "https://maps.google.com/?q=Huinnyeoul+Culture+Village",
+                    introUrl: "https://haru-tsai.com/huinnyeoul-culture-village/"
+                },
+                {
+                    id: "d5-transit",
+                    time: "17:00",
+                    title: "🚕 飯店集合提取行李，前往機場",
+                    desc: "回飯店提取寄放的手提行李，利用 Uber 快速呼叫計程車直達金海國際機場，準備辦理登機與免稅品退稅！",
+                    badgeText: "前往機場",
+                    badgeColor: "violet",
+                    mapUrl: "https://maps.google.com/?q=Gimhae+International+Airport"
+                },
+                {
+                    id: "d5-flight",
+                    time: "20:45",
+                    title: "✈️ 返程航班：金海 ➔ 台北 (虎航 IT607)",
+                    desc: "搭乘 IT607 班機起飛返台，預計於 22:10 降落桃園國際機場，結束這趟美麗充實的釜山旅行！",
+                    badgeText: "返航台北",
+                    badgeColor: "orange",
+                    memo: "預計台灣時間 22:10 降落桃園機場第一航廈。",
+                    mapUrl: "https://maps.google.com/?q=Taoyuan+International+Airport"
+                }
+            ]
+        };
+
+        let itinerary = {};
+
+        window.onload = function() {
+            loadSavedStates();
+            switchTab(1);
+            updateProgressBar();
+        };
+
+        function loadSavedStates() {
+            const savedItinerary = localStorage.getItem('busan_itinerary_data_2026_v2');
+            if (savedItinerary) {
+                itinerary = JSON.parse(savedItinerary);
+                
+                // 自動修補航班與時間
+                if (itinerary[1] && itinerary[1][0]) {
+                    itinerary[1][0].time = "16:40";
+                }
+                if (itinerary[5] && itinerary[5][itinerary[5].length - 1]) {
+                    itinerary[5][itinerary[5].length - 1].time = "20:45";
+                    itinerary[5][itinerary[5].length - 1].title = "✈️ 返程航班：金海 ➔ 台北 (虎航 IT607)";
+                }
+                localStorage.setItem('busan_itinerary_data_2026_v2', JSON.stringify(itinerary));
+            } else {
+                itinerary = JSON.parse(JSON.stringify(defaultItinerary));
+                localStorage.setItem('busan_itinerary_data_2026_v2', JSON.stringify(itinerary));
+            }
+
+            const savedStates = localStorage.getItem('busan_itinerary_completed_2026_v2');
+            if (savedStates) {
+                checkedStates = JSON.parse(savedStates);
+            }
+
+            const savedPacking = localStorage.getItem('busan_packing_list_2026_v2');
+            if (savedPacking) {
+                packingList = JSON.parse(savedPacking);
+            } else {
+                packingList = JSON.parse(JSON.stringify(defaultPackingList));
+                localStorage.setItem('busan_packing_list_2026_v2', JSON.stringify(packingList));
+            }
+
+            const savedKorean = localStorage.getItem('busan_korean_list_2026_v2');
+            if (savedKorean) {
+                koreanPhrases = JSON.parse(savedKorean);
+            } else {
+                koreanPhrases = JSON.parse(JSON.stringify(defaultKoreanPhrases));
+                localStorage.setItem('busan_korean_list_2026_v2', JSON.stringify(koreanPhrases));
+            }
+
+            const savedSubway = localStorage.getItem('busan_subway_img_2026_v2');
+            if (savedSubway) {
+                subwayImageUrl = savedSubway;
+            }
+            updateSubwayImageUI();
+
+            renderPackingList();
+            renderKoreanList();
+        }
+
+        function getBadgeStyle(color) {
+            const colors = {
+                blue: "bg-blue-100 text-blue-700",
+                emerald: "bg-emerald-100 text-emerald-700",
+                amber: "bg-amber-100 text-amber-700",
+                orange: "bg-orange-100 text-orange-700",
+                teal: "bg-teal-100 text-teal-700",
+                sky: "bg-sky-100 text-sky-700",
+                indigo: "bg-indigo-100 text-indigo-700",
+                pink: "bg-pink-100 text-pink-700",
+                slate: "bg-slate-100 text-slate-700",
+                violet: "bg-violet-100 text-violet-700",
+                yellow: "bg-yellow-100 text-yellow-700",
+                rose: "bg-rose-100 text-rose-700",
+                cyan: "bg-cyan-100 text-cyan-700"
+            };
+            return colors[color] || "bg-slate-100 text-slate-700";
+        }
+
+        function renderItineraryDay(dayId) {
+            const container = document.getElementById('itinerary-days-container');
+            
+            if (dayId === 'toolbox' || dayId === 'subway') {
+                container.classList.add('hidden');
+                return;
+            }
+            container.classList.remove('hidden');
+
+            const dayCards = itinerary[dayId] || [];
+            
+            let html = `<div id="page-day${dayId}" class="day-page space-y-4">`;
+            
+            if (dayCards.length === 0) {
+                html += `
+                <div class="text-center py-12 bg-white rounded-2xl shadow-sm border border-slate-100">
+                    <p class="text-slate-400 text-sm">此天目前還沒有安排任何行程喔！</p>
+                    <button onclick="openAddModal(${dayId})" class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-navy-600 hover:text-navy-800">
+                        <i class="fa-solid fa-plus-circle"></i> 新增第一個行程
+                    </button>
+                </div>`;
+            } else {
+                dayCards.forEach(card => {
+                    const isCompleted = checkedStates[card.id] || false;
+                    const completeClass = isCompleted ? 'bg-slate-50 border-slate-300 opacity-70 completed' : 'bg-white border-navy-900';
+                    const checkColorClass = isCompleted ? 'text-seafoam' : 'text-slate-200';
+                    
+                    let memoHtml = '';
+                    if (card.memo) {
+                        memoHtml = `
+                        <div class="bg-amber-50/50 p-3 rounded-xl border border-amber-100 mt-3 text-xs text-amber-900 space-y-1">
+                            ${card.memo.replace(/\n/g, '<br>')}
+                        </div>`;
+                    }
+
+                    let tipsHtml = '';
+                    if (card.tipsTitle && card.tipsContent) {
+                        tipsHtml = `
+                        <div class="tips-accordion bg-pink-50/40 p-3 rounded-xl border border-pink-100/70 mt-3 text-xs text-pink-950" onclick="toggleTips(event)">
+                            <div class="font-bold flex items-center justify-between cursor-pointer text-pink-800">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-circle-exclamation"></i> ${card.tipsTitle}</span>
+                                <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                            </div>
+                            <div class="tips-content mt-2 pt-2 border-t border-pink-100/60 hidden">
+                                ${card.tipsContent.replace(/\n/g, '<br>')}
+                            </div>
+                        </div>`;
+                    }
+
+                    // 圖片渲染 (網址或 Base64 手機相片)
+                    let imgHtml = '';
+                    if (card.imgUrl) {
+                        imgHtml = `
+                        <div class="relative w-full h-40 mt-3 rounded-xl overflow-hidden border border-slate-100 shadow-sm" onclick="event.stopPropagation()">
+                            <img src="${card.imgUrl}" alt="${card.title}" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'">
+                        </div>`;
+                    }
+
+                    // 地圖位置與景點網頁介紹按鈕
+                    let linksHtml = '';
+                    if (card.mapUrl || card.introUrl) {
+                        linksHtml = `<div class="flex flex-wrap gap-2 mt-3" onclick="event.stopPropagation()">`;
+                        if (card.mapUrl) {
+                            linksHtml += `
+                            <a href="${card.mapUrl}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 transition font-bold border border-blue-100">
+                                <i class="fa-solid fa-map-location-dot"></i> <span>地圖位置</span>
+                            </a>`;
+                        }
+                        if (card.introUrl) {
+                            linksHtml += `
+                            <a href="${card.introUrl}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 transition font-bold border border-emerald-100">
+                                <i class="fa-solid fa-circle-info"></i> <span>景點介紹</span>
+                            </a>`;
+                        }
+                        linksHtml += `</div>`;
+                    }
+
+                    html += `
+                    <div class="timeline-item flex items-start gap-4 relative" data-id="${card.id}">
+                        <div class="timeline-line relative flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-navy-50 flex items-center justify-center border-2 border-navy-600 z-10 shadow-sm">
+                                <span class="text-xs font-bold text-navy-900">${card.time || '未定'}</span>
+                            </div>
+                        </div>
+                        <div class="schedule-card p-5 rounded-2xl border-l-4 shadow-sm flex-1 hover:shadow-md transition-all duration-300 cursor-pointer ${completeClass}" onclick="clickCard('${card.id}', this)">
+                            <div class="flex justify-between items-start gap-2">
+                                <div class="flex-1">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${getBadgeStyle(card.badgeColor)}">${card.badgeText || '旅程'}</span>
+                                    <h3 class="text-lg font-bold text-navy-900 mt-1 spot-title">${card.title}</h3>
+                                </div>
+                                <div class="flex items-center gap-2.5" onclick="event.stopPropagation()">
+                                    <button onclick="openEditModal('${card.id}', ${dayId})" class="text-slate-400 hover:text-navy-600 transition text-sm p-1" title="編輯行程">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button onclick="triggerDeleteConfirm('${card.id}', ${dayId})" class="text-slate-400 hover:text-rose-500 transition text-sm p-1" title="刪除行程">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                    <button onclick="clickCardFromBtn('${card.id}', this)" class="check-box text-2xl ${checkColorClass} transition-colors">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2 spot-desc">${card.desc}</p>
+                            ${imgHtml}
+                            ${linksHtml}
+                            ${memoHtml}
+                            ${tipsHtml}
+                        </div>
+                    </div>`;
+                });
+            }
+
+            html += `
+            <div class="pt-4 flex justify-center">
+                <button onclick="openAddModal(${dayId})" class="flex items-center gap-2 px-5 py-3 border-2 border-dashed border-slate-300 hover:border-navy-600 text-slate-500 hover:text-navy-900 rounded-2xl transition-all duration-300 text-sm font-bold bg-white/50 w-full justify-center">
+                    <i class="fa-solid fa-plus-circle text-navy-600"></i> 新增行程卡片
+                </button>
+            </div>`;
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach((btn, index) => {
+                if (tabId === 'toolbox') {
+                    if (index === buttons.length - 1) btn.classList.add('tab-active');
+                    else btn.classList.remove('tab-active');
+                } else if (tabId === 'subway') {
+                    if (index === buttons.length - 2) btn.classList.add('tab-active');
+                    else btn.classList.remove('tab-active');
+                } else {
+                    if (index === tabId - 1) btn.classList.add('tab-active');
+                    else btn.classList.remove('tab-active');
+                }
+            });
+
+            const toolboxPage = document.getElementById('page-toolbox');
+            const subwayPage = document.getElementById('page-subway');
+            
+            // 隱藏全部
+            toolboxPage.classList.add('hidden');
+            subwayPage.classList.add('hidden');
+
+            if (tabId === 'toolbox') {
+                toolboxPage.classList.remove('hidden');
+                renderItineraryDay('toolbox');
+            } else if (tabId === 'subway') {
+                subwayPage.classList.remove('hidden');
+                renderItineraryDay('subway');
+            } else {
+                renderItineraryDay(tabId);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openTab(tabId) {
+            switchTab(tabId);
+        }
+
+        function clickCardFromBtn(id, checkBtn) {
+            const card = checkBtn.closest('.schedule-card');
+            clickCard(id, card);
+        }
+
+        function clickCard(id, cardElement) {
+            const isCompleted = cardElement.classList.toggle('completed');
+            checkedStates[id] = isCompleted;
+
+            if (isCompleted) {
+                cardElement.classList.add('bg-slate-50', 'border-slate-300', 'opacity-70');
+                cardElement.classList.remove('bg-white', 'border-navy-900');
+                const checkBtn = cardElement.querySelector('.check-box');
+                checkBtn.classList.remove('text-slate-200');
+                checkBtn.classList.add('text-seafoam');
+            } else {
+                cardElement.classList.add('bg-white', 'border-navy-900');
+                cardElement.classList.remove('bg-slate-50', 'border-slate-300', 'opacity-70');
+                const checkBtn = cardElement.querySelector('.check-box');
+                checkBtn.classList.add('text-slate-200');
+                checkBtn.classList.remove('text-seafoam');
+            }
+
+            localStorage.setItem('busan_itinerary_completed_2026_v2', JSON.stringify(checkedStates));
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            let total = 0;
+            let checked = 0;
+
+            Object.keys(itinerary).forEach(day => {
+                itinerary[day].forEach(card => {
+                    total++;
+                    if (checkedStates[card.id]) {
+                        checked++;
+                    }
+                });
+            });
+            
+            const percent = total > 0 ? Math.round((checked / total) * 100) : 0;
+
+            document.getElementById('total-count').innerText = total;
+            document.getElementById('checked-count').innerText = checked;
+            document.getElementById('progress-percent').innerText = percent + '%';
+            document.getElementById('progress-fill').style.width = percent + '%';
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // 相片壓縮演算法：防止大圖導致 LocalStorage 塞滿 (限制大約 600px 寬度)
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    // 最高寬度控制
+                    const max_size = 600;
+                    if (width > max_size) {
+                        height *= max_size / width;
+                        width = max_size;
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    
+                    // 設定到欄位與預覽
+                    document.getElementById('form-img-url').value = compressedBase64;
+                    previewImageInput(compressedBase64);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function previewImageInput(value) {
+            const container = document.getElementById('modal-img-preview-container');
+            const preview = document.getElementById('modal-img-preview');
+            if (value.trim()) {
+                preview.src = value;
+                container.classList.remove('hidden');
+            } else {
+                preview.src = "";
+                container.classList.add('hidden');
+            }
+        }
+
+        function removeModalImage() {
+            document.getElementById('form-img-url').value = "";
+            document.getElementById('form-img-file').value = "";
+            document.getElementById('modal-img-preview-container').classList.add('hidden');
+        }
+
+        function showModalFields(mode) {
+            document.getElementById('form-mode').value = mode;
+            
+            document.getElementById('modal-schedule-fields').classList.add('hidden');
+            document.getElementById('modal-packing-fields').classList.add('hidden');
+            document.getElementById('modal-korean-fields').classList.add('hidden');
+            document.getElementById('modal-subway-fields').classList.add('hidden');
+            
+            if (mode === 'schedule') {
+                document.getElementById('modal-schedule-fields').classList.remove('hidden');
+            } else if (mode === 'packing') {
+                document.getElementById('modal-packing-fields').classList.remove('hidden');
+            } else if (mode === 'korean') {
+                document.getElementById('modal-korean-fields').classList.remove('hidden');
+            } else if (mode === 'subway') {
+                document.getElementById('modal-subway-fields').classList.remove('hidden');
+            }
+        }
+
+        function openAddModal(dayId) {
+            document.getElementById('modal-title').innerText = `➕ 新增行程`;
+            document.getElementById('form-card-id').value = '';
+            document.getElementById('form-day').value = dayId;
+            document.getElementById('form-time').value = '';
+            document.getElementById('form-title').value = '';
+            document.getElementById('form-desc').value = '';
+            document.getElementById('form-badge-text').value = '';
+            document.getElementById('form-badge-color').value = 'blue';
+            document.getElementById('form-map-url').value = '';
+            document.getElementById('form-intro-url').value = '';
+            document.getElementById('form-memo').value = '';
+            document.getElementById('form-tips-title').value = '';
+            document.getElementById('form-tips-content').value = '';
+            
+            removeModalImage();
+
+            showModalFields('schedule');
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function openEditModal(cardId, dayId) {
+            const cardData = itinerary[dayId].find(c => c.id === cardId);
+            if (!cardData) return;
+
+            document.getElementById('modal-title').innerText = `✏️ 編輯行程卡片`;
+            document.getElementById('form-card-id').value = cardData.id;
+            document.getElementById('form-day').value = dayId;
+            document.getElementById('form-time').value = cardData.time || '';
+            document.getElementById('form-title').value = cardData.title || '';
+            document.getElementById('form-desc').value = cardData.desc || '';
+            document.getElementById('form-badge-text').value = cardData.badgeText || '';
+            document.getElementById('form-badge-color').value = cardData.badgeColor || 'blue';
+            document.getElementById('form-map-url').value = cardData.mapUrl || '';
+            document.getElementById('form-intro-url').value = cardData.introUrl || '';
+            document.getElementById('form-memo').value = cardData.memo || '';
+            document.getElementById('form-tips-title').value = cardData.tipsTitle || '';
+            document.getElementById('form-tips-content').value = cardData.tipsContent || '';
+
+            if (cardData.imgUrl) {
+                document.getElementById('form-img-url').value = cardData.imgUrl;
+                previewImageInput(cardData.imgUrl);
+            } else {
+                removeModalImage();
+            }
+
+            showModalFields('schedule');
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        }
+
+        // 行李備忘新增、編輯控制
+        function openPackingModal() {
+            document.getElementById('modal-title').innerText = `➕ 新增行李打包項目`;
+            document.getElementById('form-card-id').value = '';
+            document.getElementById('form-pack-title').value = '';
+            document.getElementById('form-pack-sub').value = '';
+
+            showModalFields('packing');
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function openEditPacking(id) {
+            const item = packingList.find(p => p.id === id);
+            if (!item) return;
+
+            document.getElementById('modal-title').innerText = `✏️ 編輯行李打包項目`;
+            document.getElementById('form-card-id').value = item.id;
+            document.getElementById('form-pack-title').value = item.text;
+            document.getElementById('form-pack-sub').value = item.subtext || '';
+
+            showModalFields('packing');
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        // 韓語備忘新增、編輯控制
+        function openKoreanModal() {
+            document.getElementById('modal-title').innerText = `➕ 新增常用韓語語料`;
+            document.getElementById('form-card-id').value = '';
+            document.getElementById('form-kor-zh').value = '';
+            document.getElementById('form-kor-kr').value = '';
+            document.getElementById('form-kor-pin').value = '';
+
+            showModalFields('korean');
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function openEditKorean(id) {
+            const phrase = koreanPhrases.find(k => k.id === id);
+            if (!phrase) return;
+
+            document.getElementById('modal-title').innerText = `✏️ 編輯常用韓語`;
+            document.getElementById('form-card-id').value = phrase.id;
+            document.getElementById('form-kor-zh').value = phrase.chinese;
+            document.getElementById('form-kor-kr').value = phrase.korean;
+            document.getElementById('form-kor-pin').value = phrase.pronunciation || '';
+
+            showModalFields('korean');
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function saveCardForm() {
+            const mode = document.getElementById('form-mode').value;
+
+            if (mode === 'schedule') {
+                saveScheduleForm();
+            } else if (mode === 'packing') {
+                savePackingForm();
+            } else if (mode === 'korean') {
+                saveKoreanForm();
+            } else if (mode === 'subway') {
+                saveSubwayForm();
+            }
+        }
+
+        function saveScheduleForm() {
+            const cardId = document.getElementById('form-card-id').value;
+            const targetDay = parseInt(document.getElementById('form-day').value);
+            const time = document.getElementById('form-time').value.trim() || '未定';
+            const title = document.getElementById('form-title').value.trim();
+            const desc = document.getElementById('form-desc').value.trim();
+            const badgeText = document.getElementById('form-badge-text').value.trim() || '旅程';
+            const badgeColor = document.getElementById('form-badge-color').value;
+            const mapUrl = document.getElementById('form-map-url').value.trim();
+            const introUrl = document.getElementById('form-intro-url').value.trim();
+            const memo = document.getElementById('form-memo').value.trim();
+            const tipsTitle = document.getElementById('form-tips-title').value.trim();
+            const tipsContent = document.getElementById('form-tips-content').value.trim();
+            const imgUrl = document.getElementById('form-img-url').value.trim();
+
+            if (!title) {
+                showToast("請填寫行程名稱！", "warning");
+                return;
+            }
+
+            if (cardId) {
+                let foundSourceDay = null;
+                Object.keys(itinerary).forEach(d => {
+                    const idx = itinerary[d].findIndex(c => c.id === cardId);
+                    if (idx > -1) foundSourceDay = parseInt(d);
+                });
+
+                if (foundSourceDay !== null) {
+                    if (foundSourceDay === targetDay) {
+                        const cardIdx = itinerary[targetDay].findIndex(c => c.id === cardId);
+                        itinerary[targetDay][cardIdx] = {
+                            id: cardId, time, title, desc, badgeText, badgeColor, mapUrl, introUrl, memo, tipsTitle, tipsContent, imgUrl
+                        };
+                    } else {
+                        const cardIdx = itinerary[foundSourceDay].findIndex(c => c.id === cardId);
+                        itinerary[foundSourceDay].splice(cardIdx, 1);
+                        itinerary[targetDay].push({
+                            id: cardId, time, title, desc, badgeText, badgeColor, mapUrl, introUrl, memo, tipsTitle, tipsContent, imgUrl
+                        });
+                    }
+                }
+            } else {
+                const newId = "card-" + Date.now();
+                itinerary[targetDay].push({
+                    id: newId, time, title, desc, badgeText, badgeColor, mapUrl, introUrl, memo, tipsTitle, tipsContent, imgUrl
+                });
+            }
+
+            localStorage.setItem('busan_itinerary_data_2026_v2', JSON.stringify(itinerary));
+            closeModal();
+            switchTab(currentTab);
+            updateProgressBar();
+        }
+
+        function savePackingForm() {
+            const itemId = document.getElementById('form-card-id').value;
+            const text = document.getElementById('form-pack-title').value.trim();
+            const subtext = document.getElementById('form-pack-sub').value.trim();
+
+            if (!text) {
+                showToast("請填寫行李物品名稱！", "warning");
+                return;
+            }
+
+            if (itemId) {
+                const itemIdx = packingList.findIndex(p => p.id === itemId);
+                if (itemIdx > -1) {
+                    packingList[itemIdx].text = text;
+                    packingList[itemIdx].subtext = subtext;
+                }
+            } else {
+                const newId = "pack-" + Date.now();
+                packingList.push({ id: newId, text, subtext, checked: false });
+            }
+
+            localStorage.setItem('busan_packing_list_2026_v2', JSON.stringify(packingList));
+            closeModal();
+            renderPackingList();
+        }
+
+        function saveKoreanForm() {
+            const korId = document.getElementById('form-card-id').value;
+            const chinese = document.getElementById('form-kor-zh').value.trim();
+            const korean = document.getElementById('form-kor-kr').value.trim();
+            const pronunciation = document.getElementById('form-kor-pin').value.trim();
+
+            if (!chinese || !korean) {
+                showToast("中文意思與韓文韓字為必填項目！", "warning");
+                return;
+            }
+
+            if (korId) {
+                const korIdx = koreanPhrases.findIndex(k => k.id === korId);
+                if (korIdx > -1) {
+                    koreanPhrases[korIdx].chinese = chinese;
+                    koreanPhrases[korIdx].korean = korean;
+                    koreanPhrases[korIdx].pronunciation = pronunciation;
+                }
+            } else {
+                const newId = "kor-" + Date.now();
+                koreanPhrases.push({ id: newId, chinese, korean, pronunciation });
+            }
+
+            localStorage.setItem('busan_korean_list_2026_v2', JSON.stringify(koreanPhrases));
+            closeModal();
+            renderKoreanList();
+        }
+
+        // ================= 地鐵圖上傳與設定功能區塊 =================
+        function updateSubwayImageUI() {
+            const imgEl = document.getElementById('subway-main-img');
+            if (imgEl) {
+                imgEl.src = subwayImageUrl;
+            }
+        }
+
+        function openEditSubwayModal() {
+            document.getElementById('modal-title').innerText = `🖼️ 更換地鐵圖/路線圖`;
+            
+            // 如果目前不是預設圖，則填入網址列；若是預設圖，則留空
+            const urlInput = document.getElementById('form-subway-img-url');
+            urlInput.value = (subwayImageUrl !== "IMG_8952.JPG") ? subwayImageUrl : "";
+            
+            previewSubwayImageInput(subwayImageUrl);
+            showModalFields('subway');
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function previewSubwayImageInput(value) {
+            const preview = document.getElementById('modal-subway-img-preview');
+            // 當前輸入若有值，則顯示該值；否則顯示預設圖
+            preview.src = value ? value : "IMG_8952.JPG";
+        }
+
+        function handleSubwayImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    // 地鐵圖需要保留較高解析度供放大，設為 max 1600px
+                    const max_size = 1600;
+                    if (width > max_size || height > max_size) {
+                        if (width > height) {
+                            height *= max_size / width;
+                            width = max_size;
+                        } else {
+                            width *= max_size / height;
+                            height = max_size;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+                    
+                    document.getElementById('form-subway-img-url').value = compressedBase64;
+                    previewSubwayImageInput(compressedBase64);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeModalSubwayImage() {
+            document.getElementById('form-subway-img-url').value = "";
+            document.getElementById('form-subway-img-file').value = "";
+            previewSubwayImageInput("IMG_8952.JPG"); // 恢復預覽成預設圖
+        }
+
+        function saveSubwayForm() {
+            const imgUrl = document.getElementById('form-subway-img-url').value.trim();
+            subwayImageUrl = imgUrl ? imgUrl : "IMG_8952.JPG"; // 沒填就是預設
+            
+            localStorage.setItem('busan_subway_img_2026_v2', subwayImageUrl);
+            updateSubwayImageUI();
+            closeModal();
+            showToast("地鐵路線圖已成功更新！", "success");
+        }
+        // ===================================================
+
+        function renderPackingList() {
+            const container = document.getElementById('packing-container');
+            if (!container) return;
+
+            let html = '';
+            if (packingList.length === 0) {
+                html = `<div class="col-span-2 text-center text-slate-400 text-xs py-4">目前行李清單空空如也，點擊右上方新增項目！</div>`;
+            } else {
+                packingList.forEach(item => {
+                    const bgClass = item.checked ? 'bg-emerald-50 border-emerald-100' : 'bg-slate-50 border-slate-100';
+                    const checkState = item.checked ? 'checked' : '';
+                    
+                    html += `
+                    <div onclick="togglePackItem('${item.id}')" class="flex items-center justify-between p-3 rounded-xl border transition cursor-pointer group hover:bg-slate-100 ${bgClass}">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" ${checkState} class="w-4 h-4 rounded text-seafoam focus:ring-seafoam border-slate-300 pointer-events-none">
+                            <div class="text-xs text-slate-700">
+                                <span class="font-bold">${item.text}</span>
+                                ${item.subtext ? `<span class="block text-[10px] text-slate-400 font-normal">${item.subtext}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 opacity-60 group-hover:opacity-100 transition" onclick="event.stopPropagation()">
+                            <button onclick="openEditPacking('${item.id}')" class="text-slate-400 hover:text-navy-900 p-1" title="編輯項目"><i class="fa-solid fa-pen text-[10px]"></i></button>
+                            <button onclick="triggerDeletePacking('${item.id}')" class="text-slate-400 hover:text-rose-500 p-1" title="刪除項目"><i class="fa-solid fa-trash-can text-[10px]"></i></button>
+                        </div>
+                    </div>`;
+                });
+            }
+            container.innerHTML = html;
+        }
+
+        function togglePackItem(id) {
+            const itemIdx = packingList.findIndex(p => p.id === id);
+            if (itemIdx > -1) {
+                packingList[itemIdx].checked = !packingList[itemIdx].checked;
+                localStorage.setItem('busan_packing_list_2026_v2', JSON.stringify(packingList));
+                renderPackingList();
+            }
+        }
+
+        function triggerDeletePacking(id) {
+            triggerConfirm(
+                "確定要刪除此行李項目嗎？",
+                "刪除後此行李備忘項目將從您的打包清單中永久移除。",
+                function() {
+                    packingList = packingList.filter(p => p.id !== id);
+                    localStorage.setItem('busan_packing_list_2026_v2', JSON.stringify(packingList));
+                    renderPackingList();
+                }
+            );
+        }
+
+        function renderKoreanList() {
+            const container = document.getElementById('korean-container');
+            if (!container) return;
+
+            let html = '';
+            if (koreanPhrases.length === 0) {
+                html = `<div class="text-center text-slate-400 text-xs py-4">目前常用韓文無內容，點擊右上方新增項目！</div>`;
+            } else {
+                koreanPhrases.forEach(phrase => {
+                    html += `
+                    <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 group transition">
+                        <div class="flex-1">
+                            <span class="font-bold text-slate-400 mr-2 text-xs">${phrase.chinese}</span>
+                            <span class="text-navy-900 font-semibold text-sm">${phrase.korean}</span>
+                            ${phrase.pronunciation ? `<span class="block text-[10px] text-slate-400 font-normal">${phrase.pronunciation}</span>` : ''}
+                        </div>
+                        <div class="flex items-center gap-1" onclick="event.stopPropagation()">
+                            <button onclick="copyText('${phrase.korean}')" class="text-slate-400 hover:text-navy-900 p-1.5" title="複製"><i class="fa-regular fa-copy"></i></button>
+                            <button onclick="openEditKorean('${phrase.id}')" class="text-slate-400 hover:text-navy-900 p-1.5 opacity-60 group-hover:opacity-100 transition" title="編輯"><i class="fa-solid fa-pen text-[11px]"></i></button>
+                            <button onclick="triggerDeleteKorean('${phrase.id}')" class="text-slate-400 hover:text-rose-500 p-1.5 opacity-60 group-hover:opacity-100 transition" title="刪除"><i class="fa-solid fa-trash-can text-[11px]"></i></button>
+                        </div>
+                    </div>`;
+                });
+            }
+            container.innerHTML = html;
+        }
+
+        function triggerDeleteKorean(id) {
+            triggerConfirm(
+                "確定要刪除此句常用韓語嗎？",
+                "刪除後此句韓文短語將會從您的備忘錄中永久移除。",
+                function() {
+                    koreanPhrases = koreanPhrases.filter(k => k.id !== id);
+                    localStorage.setItem('busan_korean_list_2026_v2', JSON.stringify(koreanPhrases));
+                    renderKoreanList();
+                }
+            );
+        }
+
+        function openLightbox(imgSrc) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            
+            img.src = imgSrc;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 50);
+            
+            document.body.classList.add('lightbox-active');
+            resetLightboxZoom();
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+            document.body.classList.remove('lightbox-active');
+        }
+
+        function zoomLightbox(change) {
+            const img = document.getElementById('lightbox-img');
+            lightboxZoomLevel += change;
+            if (lightboxZoomLevel < 0.5) lightboxZoomLevel = 0.5;
+            if (lightboxZoomLevel > 3.0) lightboxZoomLevel = 3.0;
+            img.style.transform = `scale(${lightboxZoomLevel})`;
+        }
+
+        function resetLightboxZoom() {
+            const img = document.getElementById('lightbox-img');
+            lightboxZoomLevel = 1.0;
+            img.style.transform = `scale(1.0)`;
+        }
+
+        function triggerConfirm(title, desc, callback) {
+            document.getElementById('confirm-title').innerText = title;
+            document.getElementById('confirm-desc').innerText = desc;
+            
+            const actionBtn = document.getElementById('confirm-action-btn');
+            actionBtn.onclick = function() {
+                callback();
+                closeConfirmModal(true);
+            };
+
+            document.getElementById('confirm-modal').classList.remove('hidden');
+        }
+
+        function closeConfirmModal(isConfirmed) {
+            document.getElementById('confirm-modal').classList.add('hidden');
+        }
+
+        function triggerDeleteConfirm(cardId, dayId) {
+            triggerConfirm(
+                "確定要刪除此行程嗎？",
+                "刪除後此項目的所有設定將會永久移除。",
+                function() {
+                    const cardIdx = itinerary[dayId].findIndex(c => c.id === cardId);
+                    if (cardIdx > -1) {
+                        itinerary[dayId].splice(cardIdx, 1);
+                        
+                        if (checkedStates[cardId]) {
+                            delete checkedStates[cardId];
+                            localStorage.setItem('busan_itinerary_completed_2026_v2', JSON.stringify(checkedStates));
+                        }
+                        
+                        localStorage.setItem('busan_itinerary_data_2026_v2', JSON.stringify(itinerary));
+                        switchTab(currentTab);
+                        updateProgressBar();
+                    }
+                }
+            );
+        }
+
+        // 即時匯率換算
+        function convertCurrency() {
+            const krw = document.getElementById('krw-input').value;
+            const twdResult = document.getElementById('twd-result');
+            if (krw && !isNaN(krw)) {
+                const calculated = Math.round(krw * 0.024);
+                twdResult.innerText = `NT$ ${calculated.toLocaleString()}`;
+            } else {
+                twdResult.innerText = `NT$ 0`;
+            }
+        }
+
+        function quickCalc(amount) {
+            document.getElementById('krw-input').value = amount;
+            convertCurrency();
+        }
+
+        // 一鍵複製
+        function copyText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast("已成功複製至剪貼簿！", "success");
+            } catch (err) {
+                console.error('無法複製', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // 攻略折疊
+        function toggleTips(event) {
+            event.stopPropagation();
+            const header = event.currentTarget;
+            const content = header.querySelector('.tips-content');
+            const icon = header.querySelector('i.fa-chevron-down, i.fa-chevron-up');
+            
+            const isHidden = content.classList.toggle('hidden');
+            if (isHidden) {
+                icon.className = "fa-solid fa-chevron-down text-[10px]";
+            } else {
+                icon.className = "fa-solid fa-chevron-up text-[10px]";
+            }
+        }
+
+        // 關鍵字即時搜尋篩選
+        function filterSchedule() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            
+            if (!query) {
+                switchTab(currentTab);
+                return;
+            }
+
+            const container = document.getElementById('itinerary-days-container');
+            container.classList.remove('hidden');
+            document.getElementById('page-toolbox').classList.add('hidden');
+            document.getElementById('page-subway').classList.add('hidden');
+
+            let html = `<div class="space-y-4">`;
+            let matchCount = 0;
+
+            Object.keys(itinerary).forEach(dayId => {
+                itinerary[dayId].forEach(card => {
+                    const fullText = `${card.title} ${card.desc} ${card.memo || ''} ${card.tipsTitle || ''} ${card.tipsContent || ''} Day ${dayId}`.toLowerCase();
+                    
+                    if (fullText.includes(query)) {
+                        matchCount++;
+                        const isCompleted = checkedStates[card.id] || false;
+                        const completeClass = isCompleted ? 'bg-slate-50 border-slate-300 opacity-70 completed' : 'bg-white border-navy-900';
+                        const checkColorClass = isCompleted ? 'text-seafoam' : 'text-slate-200';
+                        
+                        let memoHtml = card.memo ? `<div class="bg-amber-50/50 p-3 rounded-xl border border-amber-100 mt-3 text-xs text-amber-900">${card.memo.replace(/\n/g, '<br>')}</div>` : '';
+                        let tipsHtml = (card.tipsTitle && card.tipsContent) ? `
+                        <div class="tips-accordion bg-pink-50/40 p-3 rounded-xl border border-pink-100/70 mt-3 text-xs text-pink-950" onclick="toggleTips(event)">
+                            <div class="font-bold flex items-center justify-between cursor-pointer text-pink-800">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-circle-exclamation"></i> ${card.tipsTitle}</span>
+                                <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                            </div>
+                            <div class="tips-content mt-2 pt-2 border-t border-pink-100/60 hidden">
+                                ${card.tipsContent.replace(/\n/g, '<br>')}
+                            </div>
+                        </div>` : '';
+
+                        let imgHtml = '';
+                        if (card.imgUrl) {
+                            imgHtml = `
+                            <div class="relative w-full h-40 mt-3 rounded-xl overflow-hidden border border-slate-100 shadow-sm" onclick="event.stopPropagation()">
+                                <img src="${card.imgUrl}" alt="${card.title}" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'">
+                            </div>`;
+                        }
+
+                        let linksHtml = '';
+                        if (card.mapUrl || card.introUrl) {
+                            linksHtml = `<div class="flex flex-wrap gap-2 mt-3" onclick="event.stopPropagation()">`;
+                            if (card.mapUrl) {
+                                linksHtml += `
+                                <a href="${card.mapUrl}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 transition font-bold border border-blue-100">
+                                    <i class="fa-solid fa-map-location-dot"></i> <span>地圖位置</span>
+                                </a>`;
+                            }
+                            if (card.introUrl) {
+                                linksHtml += `
+                                <a href="${card.introUrl}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 transition font-bold border border-emerald-100">
+                                    <i class="fa-solid fa-circle-info"></i> <span>景點介紹</span>
+                                </a>`;
+                            }
+                            linksHtml += `</div>`;
+                        }
+
+                        html += `
+                        <div class="timeline-item flex items-start gap-4 relative">
+                            <div class="timeline-line relative flex flex-col items-center">
+                                <div class="w-12 h-12 rounded-full bg-navy-100 flex items-center justify-center border-2 border-navy-800 z-10 shadow-sm" title="Day ${dayId}">
+                                    <span class="text-[10px] font-black text-navy-900">D${dayId}</span>
+                                </div>
+                            </div>
+                            <div class="schedule-card p-5 rounded-2xl border-l-4 shadow-sm flex-1 hover:shadow-md transition-all duration-300 cursor-pointer ${completeClass}" onclick="clickCard('${card.id}', this)">
+                                <div class="flex justify-between items-start gap-2">
+                                    <div class="flex-1">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${getBadgeStyle(card.badgeColor)}">Day ${dayId} · ${card.badgeText || '旅程'}</span>
+                                        <h3 class="text-lg font-bold text-navy-900 mt-1 spot-title">${card.title}</h3>
+                                    </div>
+                                    <div class="flex items-center gap-2.5" onclick="event.stopPropagation()">
+                                        <button onclick="openEditModal('${card.id}', ${dayId})" class="text-slate-400 hover:text-navy-600 transition text-sm p-1"><i class="fa-solid fa-pen"></i></button>
+                                        <button onclick="triggerDeleteConfirm('${card.id}', ${dayId})" class="text-slate-400 hover:text-rose-500 transition text-sm p-1"><i class="fa-solid fa-trash-can"></i></button>
+                                        <button onclick="clickCardFromBtn('${card.id}', this)" class="check-box text-2xl ${checkColorClass} transition-colors"><i class="fa-solid fa-circle-check"></i></button>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2 spot-desc">${card.desc}</p>
+                                ${imgHtml}
+                                ${linksHtml}
+                                ${memoHtml}
+                                ${tipsHtml}
+                            </div>
+                        </div>`;
+                    }
+                });
+            });
+
+            if (matchCount === 0) {
+                html += `
+                <div class="text-center py-12 bg-white rounded-2xl shadow-sm border border-slate-100">
+                    <p class="text-slate-400 text-sm">找不到包含「${query}」的行程，請換個字詞試試看！</p>
+                </div>`;
+            }
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl text-white text-xs font-bold shadow-lg z-50 transition-opacity duration-300 ${type === 'warning' ? 'bg-orange-500' : 'bg-navy-900'}`;
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
